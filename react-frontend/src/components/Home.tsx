@@ -6,7 +6,7 @@ import './Home.css';
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { APP_URL, CLIENT_ID, SERVER_URL } from '../utils/constants';
-import SelectProjects from '../icons/SelectProjects'
+import SelectProjects from '../icons/SelectProjectsIcon'
 import PreviewIcon from '../icons/PreviewIcon'
 import MyButton from './MyButton';
 import MyModal from './MyModal';
@@ -100,7 +100,7 @@ function Home() {
           </div>
         </div>
         <div id="get-started-container">
-          <MyButton width={300} height={80} title={"Get Started!"} onClick={() => githubAuthRedirect()}/>
+          <MyButton style={{width: '300px', height: '80px'}} title={"Get Started!"} onClick={() => githubAuthRedirect()}/>
         </div>
         <MyModal 
           modalStyle={{width: "50%", height: "80%", minWidth: "400px", minHeight: "600px", padding: "50px"}} 

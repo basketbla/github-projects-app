@@ -4,6 +4,13 @@
   font: 'poppins';
 }
 
+#app-container {
+  height: 100vh;
+  box-sizing: border-box;
+  min-height: 600px;
+  position: relative;
+}
+
 /* .App {
   text-align: center;
 }

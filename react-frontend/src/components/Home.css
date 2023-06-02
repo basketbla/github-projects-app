@@ -1,9 +1,5 @@
 #home-container {
-  height: 100vh;
   padding-top: 100px;
-  box-sizing: border-box;
-  min-height: 600px;
-  position: relative;
 }
 
 @keyframes animateWave {

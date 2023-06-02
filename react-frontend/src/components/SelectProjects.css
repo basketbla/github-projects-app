@@ -1,0 +1,63 @@
+@keyframes animateWave {
+  0% {
+    transform: scale(1,0);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+#select-projects-wave {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  pointer-events: none;
+}
+
+#select-projects-wave > svg {
+  display: block;
+  animation: animateWave 2000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  transform-origin: bottom;
+}
+
+#sp-container {
+  padding-top: 50px;
+}
+
+#sp-title {
+  font-size: 3rem;
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+#sp-projects-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50vh;
+  overflow: scroll;
+}
+
+#sp-included-label {
+  width: 50%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#sp-excluded-label {
+  width: 50%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+#sp-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
