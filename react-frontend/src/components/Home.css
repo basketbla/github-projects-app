@@ -1,0 +1,135 @@
+#home-container {
+  height: 100vh;
+  padding-top: 100px;
+  box-sizing: border-box;
+  min-height: 600px;
+  position: relative;
+}
+
+@keyframes animateWave {
+  0% {
+    transform: scale(1,0);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+#home-wave {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  pointer-events: none;
+}
+
+#home-wave > svg {
+  display: block;
+  animation: animateWave 2000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  transform-origin: bottom;
+}
+
+#home-title {
+  font-size: 4rem;
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+#home-steps-list {
+  display: flex;
+  flex-direction: row;
+  width: "100%";
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+
+.home-step {
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 3px rgb(122, 122, 122);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-step-num {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-family: 'poppins';
+  font-size: 2rem;
+}
+
+.home-step-image {
+  width: 100px;
+  height: 100px;
+}
+
+.home-step-image > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.home-step-desc {
+  font-family: 'poppins';
+  font-size: 1rem;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#get-started-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#home-faq {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+  color: white;
+  animation: textFadeIn 2000ms;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#home-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  color: white;
+  animation: textFadeIn 2000ms;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#faq-title {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.faq-subtitle {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 20px;
+}

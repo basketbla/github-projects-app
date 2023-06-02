@@ -1,0 +1,42 @@
+#my-button {
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  font-family: "poppins";
+  font-weight: bold;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@keyframes animateButton {
+  0% {
+    transform: 0;
+  }
+  100% {
+    transform: translateY(-0.25em);
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(114, 114, 114);
+  }
+}
+
+@keyframes animateButtonBack {
+  0% {
+    transform: translateY(-0.25em);
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(114, 114, 114);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+#my-button:hover,
+#my-button:focus {
+  animation: animateButton 1000ms forwards;
+}
+
+#my-button:not(:hover) {
+  animation: animateButtonBack 1000ms forwards;
+}
