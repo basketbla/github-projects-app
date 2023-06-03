@@ -27,6 +27,16 @@ function Home() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [showFAQModal, setShowFAQModal] = useState<boolean>(false);
   const [test, setTest] = useState(0);
+  const [animationFinished, setAnimationFinished] = useState(false);
+
+  // Mark when wave animation done
+  useEffect(() => {
+    const markAnimationsDone = async () => {
+      await new Promise(r => setTimeout(r, 2000));
+      setAnimationFinished(true);
+    }
+    markAnimationsDone();
+  }, []);
 
 
   useEffect(() => {
@@ -38,10 +48,11 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (githubToken != null) {
+    console.log(animationFinished);
+    if (githubToken != null && animationFinished) {
       navigate('/select-projects');
     }
-  }, [githubToken]);
+  }, [githubToken, animationFinished]);
   
   const githubAuthRedirect = () => {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;

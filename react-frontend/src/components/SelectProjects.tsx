@@ -19,7 +19,8 @@ export default function SelectProjects() {
   // const [includedProjects, setIncludedProjects] = useState(["repoffdfd 1", "repo fd2", "refdsfpo 3", "repo fdsf31", "repofd3 2", "refdpo 33", "rep3ofd 31", "re3fdpo 2", "repofdsf 3", "fdsfdrepo 1", "repfdsfo 2", "repofdfd 3"]);
   const [includedProjects, setIncludedProjects] = useState([]);
   const [excludedProjects, setExcludedProjects] = useState([]);
-  const [fetchingProjects, setFetchingProjects] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState("Fetching your projects...");
   
   // Use effect: if user exists in firebase, redirect to projects page
   // Else, fetch projects
@@ -35,21 +36,20 @@ export default function SelectProjects() {
       });
       console.log(response.data);
       setIncludedProjects(response.data);
-      setFetchingProjects(false);
+      setLoading(false);
     }
 
     fetchProjects();
   }, [githubToken]);
 
-  const fetchProjects = async () => {
-    const response = await axios.get(SERVER_URL + "/project-list", {
-      params: {
-        accessToken: githubToken
-      }
-    });
-    console.log(response.data);
-    // setIncludedProjects(response.data);
+  const getProjectDetails = async () => {
+    setLoadingMessage("Generating your previews. This may take a moment...")
+    setLoading(true);
+
+    // Have some endpoint
   }
+
+  
 
   return (
     <div id="sp-container">
@@ -57,10 +57,10 @@ export default function SelectProjects() {
         Select and Order Projects
       </div>
       {
-        fetchingProjects ?
+        loading ?
         <div id="sp-loading-container">
-          <div id="sp-loading-title">Fetching your projects...</div>
-          <ClimbingBoxLoader color="#0099FF" />
+          <ClimbingBoxLoader color="#0099FF" size={30}/>
+          <div id="sp-loading-title">{loadingMessage}</div>
         </div>
         :
         <>
@@ -88,7 +88,7 @@ export default function SelectProjects() {
             />
           </div>
           <div id="sp-button-container">
-            <MyButton style={{width: '300px', height: '80px', marginTop: '20px'}} title={"Done!"} onClick={() => console.log('hi')}/>
+            <MyButton style={{width: '300px', height: '80px', marginTop: '20px'}} title={"Done!"} onClick={getProjectDetails}/>
           </div>
         </>
       }
