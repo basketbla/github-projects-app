@@ -16,7 +16,7 @@
 
 #select-projects-wave > svg {
   display: block;
-  animation: animateWave 2000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  /* animation: animateWave 2000ms cubic-bezier(0.23, 1, 0.32, 1) forwards; */
   transform-origin: bottom;
 }
 

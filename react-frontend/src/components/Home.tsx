@@ -10,12 +10,16 @@ import SelectProjects from '../icons/SelectProjectsIcon'
 import PreviewIcon from '../icons/PreviewIcon'
 import MyButton from './MyButton';
 import MyModal from './MyModal';
-import ReactModal from 'react-modal';
+import { useAuth } from '../contexts/AuthContext';
+import { HomeWave } from '../icons/Waves';
+
 
 function Home() {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { signInWithGithub, currentUser, githubToken } = useAuth();
 
   const searchParams = new URLSearchParams(location.search);
   const [accessToken, setAccessToken] = useState<any | null>(null);
@@ -31,7 +35,10 @@ function Home() {
       console.log('fonts ready');
       setFontsLoaded(true);
     });
-  }, []);
+
+    console.log(currentUser);
+    console.log(githubToken);
+  }, [currentUser, githubToken]);
   
   const githubAuthRedirect = () => {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
@@ -54,6 +61,13 @@ function Home() {
     });
     console.log(response.data);
     setProjects(response.data);
+  }
+
+  const handleSignIn = async () => {
+
+    // This is fucked
+    await signInWithGithub();
+    navigate('/select-projects');
   }
 
   if (!fontsLoaded) {
@@ -100,7 +114,9 @@ function Home() {
           </div>
         </div>
         <div id="get-started-container">
-          <MyButton style={{width: '300px', height: '80px'}} title={"Get Started!"} onClick={() => githubAuthRedirect()}/>
+          {/* <MyButton style={{width: '300px', height: '80px'}} title={"Get Started!"} onClick={() => githubAuthRedirect()}/> */}
+          {/* <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => handleSignIn()}/> */}
+          <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => navigate('/select-projects')}/>
         </div>
         <MyModal 
           modalStyle={{width: "50%", height: "80%", minWidth: "400px", minHeight: "600px", padding: "50px"}} 
@@ -143,7 +159,7 @@ function Home() {
           By Rhett Owen
         </a>
         <div id="home-wave">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,96L48,117.3C96,139,192,181,288,208C384,235,480,245,576,234.7C672,224,768,192,864,197.3C960,203,1056,245,1152,256C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+          {HomeWave}
         </div>
     </div>
   );
