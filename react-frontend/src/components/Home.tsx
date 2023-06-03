@@ -35,10 +35,13 @@ function Home() {
       console.log('fonts ready');
       setFontsLoaded(true);
     });
+  }, []);
 
-    console.log(currentUser);
-    console.log(githubToken);
-  }, [currentUser, githubToken]);
+  useEffect(() => {
+    if (githubToken != null) {
+      navigate('/select-projects');
+    }
+  }, [githubToken]);
   
   const githubAuthRedirect = () => {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
@@ -64,10 +67,7 @@ function Home() {
   }
 
   const handleSignIn = async () => {
-
-    // This is fucked
     await signInWithGithub();
-    navigate('/select-projects');
   }
 
   if (!fontsLoaded) {
@@ -115,8 +115,8 @@ function Home() {
         </div>
         <div id="get-started-container">
           {/* <MyButton style={{width: '300px', height: '80px'}} title={"Get Started!"} onClick={() => githubAuthRedirect()}/> */}
-          {/* <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => handleSignIn()}/> */}
-          <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => navigate('/select-projects')}/>
+          <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => handleSignIn()}/>
+          {/* <MyButton style={{width: '300px', height: '80px', position: 'relative', zIndex: 1}} title={"Get Started!"} onClick={() => navigate('/select-projects')}/> */}
         </div>
         <MyModal 
           modalStyle={{width: "50%", height: "80%", minWidth: "400px", minHeight: "600px", padding: "50px"}} 
@@ -138,20 +138,6 @@ function Home() {
             No. The easiest workaround I've found is just to fork them. Even if they are private, you'll still be able to get stats like your commits and such.
           </div>
         </MyModal>
-        {/* <ReactModal 
-          isOpen={showFAQModal} 
-          onRequestClose={() => setShowFAQModal(false)}
-          style={{
-            overlay: {
-            },
-            content: {
-              width: "50%", 
-              height: "80%", 
-              minWidth: "400px", 
-              minHeight: "600px"
-            }
-          }}
-        /> */}
         <div id="home-faq" onClick={() => setShowFAQModal(true)}>
           FAQ
         </div>
