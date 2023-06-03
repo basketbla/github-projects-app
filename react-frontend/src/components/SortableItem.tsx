@@ -37,16 +37,16 @@ export function SortableItem(props: any) {
   };
 
   function handleRemoveItem(id: any) {
-    const indexToRemove = props.items.indexOf(id);
+    const indexToRemove = props.items.findIndex((obj: any) => obj.id === id);
     props.setItems([...props.items.slice(0, indexToRemove), ...props.items.slice(indexToRemove + 1)]);
-    props.setOtherItems([...props.otherItems, id]);
+    props.setOtherItems([...props.otherItems, props.project]);
     props.setPreventDragEnd(true);
   }
   
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="sortable-item">
       <div className="sortable-item-text">
-        {props.id}
+        {props.project.name}
       </div>
       <ion-icon 
         name={props.type === "included" ? "close-outline" : "add-outline"}

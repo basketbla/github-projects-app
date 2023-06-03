@@ -55,7 +55,7 @@ export default function SortableList(props: any) {
         strategy={verticalListSortingStrategy}
       >
         <div style={props.style}>
-          {props.items.map((id: any) => <SortableItem key={id} id={id} {...props} setPreventDragEnd={setPreventDragEnd}/>)}
+          {props.items.map((project: any) => <SortableItem key={project.id} id={project.id} project={project} {...props} setPreventDragEnd={setPreventDragEnd}/>)}
         </div>
       </SortableContext>
     </DndContext>

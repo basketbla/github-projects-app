@@ -68,53 +68,55 @@ app.get('/project-list', async (req, res) => {
     console.log("error with projects");
   }
 
-  // Get other data from the repos
-  let ret = {};
-  let repoData;
-  let readmeResponse;
-  let languageResponse;
-  let commitsResponse;
-  let contributorsResponse;
-  for (repo of response?.data.slice(0, 20)) {
-    repo = repo.name;
-    repoData = {};
+  let ret = response?.data;
 
-    // Get readmes
-    try {
-      readmeResponse = await axios.get(`https://raw.githubusercontent.com/${username}/${repo}/main/README.md`, { headers });
-      repoData.readme = readmeResponse?.data;
-    } catch (error) {
-      console.log("error with readmes");
-    }
+  // // Get other data from the repos
+  // let ret = {};
+  // let repoData;
+  // let readmeResponse;
+  // let languageResponse;
+  // let commitsResponse;
+  // let contributorsResponse;
+  // for (repo of response?.data) {
+  //   repo = repo.name;
+  //   repoData = {};
 
-    // Get languages
-    try {
-      languageResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/languages`, { headers });
-      repoData.languages = languageResponse?.data;
-    } catch (error) {
-      console.log("error with languages");
-    }
+  //   // Get readmes
+  //   try {
+  //     readmeResponse = await axios.get(`https://raw.githubusercontent.com/${username}/${repo}/main/README.md`, { headers });
+  //     repoData.readme = readmeResponse?.data;
+  //   } catch (error) {
+  //     console.log("error with readmes");
+  //   }
 
-    // Get lines and commits written by user
-    try {
-      commitsResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/commits?author=${username}`, { headers });
-      repoData.numCommits = commitsResponse.data.length;
-    }
-    catch (error) {
-      console.log("error with commits");
-    }
+  //   // Get languages
+  //   try {
+  //     languageResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/languages`, { headers });
+  //     repoData.languages = languageResponse?.data;
+  //   } catch (error) {
+  //     console.log("error with languages");
+  //   }
 
-    // Get lines and commits written by user
-    try {
-      contributorsResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/contributors`, { headers });
-      repoData.numContributors = contributorsResponse.data.length;
-    }
-    catch (error) {
-      console.log("error with contributors");
-    }
+  //   // Get lines and commits written by user
+  //   try {
+  //     commitsResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/commits?author=${username}`, { headers });
+  //     repoData.numCommits = commitsResponse.data.length;
+  //   }
+  //   catch (error) {
+  //     console.log("error with commits");
+  //   }
 
-    ret[repo] = repoData;
-  }
+  //   // Get lines and commits written by user
+  //   try {
+  //     contributorsResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/contributors`, { headers });
+  //     repoData.numContributors = contributorsResponse.data.length;
+  //   }
+  //   catch (error) {
+  //     console.log("error with contributors");
+  //   }
+
+  //   ret[repo] = repoData;
+  // }
 
   res.send(ret);
 });

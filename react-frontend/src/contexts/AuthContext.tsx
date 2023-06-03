@@ -41,12 +41,17 @@ export function AuthProvider({ children }: any) {
     }
 
     const credential = GithubAuthProvider.credentialFromResult(signInResult);
-    const token = credential?.accessToken;
+    const token = credential?.accessToken!;
     const user = signInResult.user;
 
     setCurrentUser(user);
     setGithubToken(token);
+    localStorage.setItem("githubToken", token);
   }
+  
+  useEffect(() => {
+    setGithubToken(localStorage.getItem("githubToken"));
+  }, [githubToken]);
 
 
   useEffect(() => {

@@ -61,3 +61,16 @@
   display: flex;
   justify-content: center;
 }
+
+#sp-loading-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+#sp-loading-title {
+  /* font-weight: bold; */
+  font-size: 1rem;
+}
