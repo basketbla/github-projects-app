@@ -1,0 +1,252 @@
+[debug] [2023-06-04T00:15:29.413Z] ----------------------------------------------------------------------
+[debug] [2023-06-04T00:15:29.416Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-06-04T00:15:29.417Z] CLI Version:   12.3.0
+[debug] [2023-06-04T00:15:29.418Z] Platform:      darwin
+[debug] [2023-06-04T00:15:29.418Z] Node Version:  v18.14.2
+[debug] [2023-06-04T00:15:29.420Z] Time:          Sat Jun 03 2023 17:15:29 GMT-0700 (Pacific Daylight Time)
+[debug] [2023-06-04T00:15:29.420Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-06-04T00:15:29.492Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-06-04T00:15:29.492Z] > authorizing via signed-in user (pokerrangecalculator@gmail.com)
+[debug] [2023-06-04T00:15:29.493Z] [iam] checking project github-preview-generator for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2023-06-04T00:15:29.494Z] > refreshing access token with scopes: []
+[debug] [2023-06-04T00:15:29.501Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-06-04T00:15:29.501Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-06-04T00:15:29.763Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-06-04T00:15:29.763Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-06-04T00:15:29.790Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions [none]
+[debug] [2023-06-04T00:15:29.790Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:29.791Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2023-06-04T00:15:29.956Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions 200
+[debug] [2023-06-04T00:15:29.956Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2023-06-04T00:15:29.957Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/github-preview-generator/serviceAccounts/github-preview-generator@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-06-04T00:15:29.957Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/github-preview-generator/serviceAccounts/github-preview-generator@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-06-04T00:15:30.093Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/github-preview-generator/serviceAccounts/github-preview-generator@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2023-06-04T00:15:30.093Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/github-preview-generator/serviceAccounts/github-preview-generator@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'github-preview-generator'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2023-06-04T00:15:36.769Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator [none]
+[debug] [2023-06-04T00:15:36.998Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator 200
+[debug] [2023-06-04T00:15:36.998Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator {"projectId":"github-preview-generator","projectNumber":"638832855927","displayName":"github-preview-generator","name":"projects/github-preview-generator","resources":{"hostingSite":"github-preview-generator"},"state":"ACTIVE","etag":"1_bb20d02c-f655-4d13-b067-2f8c2d402f94"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2023-06-04T00:15:37.000Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-06-04T00:15:37.000Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:37.002Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-06-04T00:15:37.002Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:37.003Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudbuild.googleapis.com [none]
+[debug] [2023-06-04T00:15:37.003Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudbuild.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:37.005Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/artifactregistry.googleapis.com [none]
+[debug] [2023-06-04T00:15:37.005Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/artifactregistry.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:37.324Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/runtimeconfig.googleapis.com 200
+[debug] [2023-06-04T00:15:37.324Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-06-04T00:15:37.338Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudfunctions.googleapis.com 200
+[debug] [2023-06-04T00:15:37.339Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:37.517Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/artifactregistry.googleapis.com 200
+[debug] [2023-06-04T00:15:37.517Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:37.537Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudbuild.googleapis.com 200
+[debug] [2023-06-04T00:15:37.537Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:37.537Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator/adminSdkConfig [none]
+[debug] [2023-06-04T00:15:37.724Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator/adminSdkConfig 200
+[debug] [2023-06-04T00:15:37.724Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator/adminSdkConfig {"projectId":"github-preview-generator","storageBucket":"github-preview-generator.appspot.com"}
+[debug] [2023-06-04T00:15:37.725Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/github-preview-generator/configs [none]
+[debug] [2023-06-04T00:15:37.919Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/github-preview-generator/configs 200
+[debug] [2023-06-04T00:15:37.920Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/github-preview-generator/configs {}
+[debug] [2023-06-04T00:15:37.922Z] Validating nodejs source
+[debug] [2023-06-04T00:15:38.902Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2023-06-04T00:15:38.902Z] Building nodejs source
+[debug] [2023-06-04T00:15:38.904Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-06-04T00:15:38.919Z] Found firebase-functions binary at '/Users/rhettowen/Desktop/Projects/Github Projects App/react-frontend/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-06-04T00:15:39.208Z] Serving at port 8130
+
+[debug] [2023-06-04T00:15:39.538Z] Got response from /__/functions.yaml {"endpoints":{"helloWorld":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-06-04T00:15:39.547Z] shutdown requested via /__/quitquitquit
+
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/rhettowen/Desktop/Projects/Github Projects App/react-frontend/functions (71.52 KB) for uploading 
+[debug] [2023-06-04T00:15:39.600Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/github-preview-generator/locations/-/functions [none]
+[debug] [2023-06-04T00:15:40.958Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/github-preview-generator/locations/-/functions 200
+[debug] [2023-06-04T00:15:40.958Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/github-preview-generator/locations/-/functions {}
+[debug] [2023-06-04T00:15:40.960Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2023-06-04T00:15:41.704Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/-/functions 200
+[debug] [2023-06-04T00:15:41.705Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/-/functions {}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2023-06-04T00:15:41.707Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/run.googleapis.com [none]
+[debug] [2023-06-04T00:15:41.707Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/run.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:41.709Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/eventarc.googleapis.com [none]
+[debug] [2023-06-04T00:15:41.709Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/eventarc.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:41.711Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/pubsub.googleapis.com [none]
+[debug] [2023-06-04T00:15:41.711Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/pubsub.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:41.712Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/storage.googleapis.com [none]
+[debug] [2023-06-04T00:15:41.713Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/storage.googleapis.com x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:41.968Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/run.googleapis.com 200
+[debug] [2023-06-04T00:15:41.968Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:41.977Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/eventarc.googleapis.com 200
+[debug] [2023-06-04T00:15:41.978Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:41.985Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/storage.googleapis.com 200
+[debug] [2023-06-04T00:15:41.985Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[debug] [2023-06-04T00:15:42.208Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/pubsub.googleapis.com 200
+[debug] [2023-06-04T00:15:42.209Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/github-preview-generator/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2023-06-04T00:15:42.210Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-06-04T00:15:42.212Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-06-04T00:15:42.812Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2023-06-04T00:15:42.813Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-638832855927@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"107476167140721700602"}}
+[debug] [2023-06-04T00:15:43.243Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2023-06-04T00:15:43.244Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/638832855927/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-638832855927@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"110736190079382938862"}}
+[debug] [2023-06-04T00:15:43.247Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator [none]
+[debug] [2023-06-04T00:15:43.439Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator 200
+[debug] [2023-06-04T00:15:43.439Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/github-preview-generator {"projectId":"github-preview-generator","projectNumber":"638832855927","displayName":"github-preview-generator","name":"projects/github-preview-generator","resources":{"hostingSite":"github-preview-generator"},"state":"ACTIVE","etag":"1_bb20d02c-f655-4d13-b067-2f8c2d402f94"}
+[debug] [2023-06-04T00:15:43.441Z] [functions] found 1 new HTTP functions, testing setIamPolicy permission...
+[debug] [2023-06-04T00:15:43.442Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions [none]
+[debug] [2023-06-04T00:15:43.442Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions x-goog-quota-user=projects/github-preview-generator
+[debug] [2023-06-04T00:15:43.442Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2023-06-04T00:15:43.604Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions 200
+[debug] [2023-06-04T00:15:43.604Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/github-preview-generator:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2023-06-04T00:15:43.605Z] [functions] found setIamPolicy permission, proceeding with deploy
+[debug] [2023-06-04T00:15:43.606Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2023-06-04T00:15:44.062Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2023-06-04T00:15:44.062Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-638832855927-us-central1/2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip?GoogleAccessId=service-638832855927@gcf-admin-robot.iam.gserviceaccount.com&Expires=1685839544&Signature=xH1iobCdToBfnuuN03eASMJqByGgQusbitRDkodguXdBwYiHarhdxSQWD%2F2wTF9GnW9%2BAu0rAK9ua4fA92R0WUex8ccRUkgAJmKBWZBafyEnKSTtMSmK6uUQLlKWlkbMJPdYUa3RP8EODYWuh8g3HIFF2qeYpG0%2FLG0rxpifKYwU%2BAbZlXx8p1UiM3%2FBPPC6DpG2wXihf6AhjhfubHnGv4NS7onbGjlX6Qust2lpw8NXBPkgtcVAdDR8%2BUqSEIpGmetVIE20kLUwzKkOAwjR6IS2V9fxD1DBCgPbVRXl2spsaBsdIuU0vnaZ%2FsKq4h55ObWvNxhDohLhAVsrYt70Rg%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-638832855927-us-central1","object":"2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip"}}
+[debug] [2023-06-04T00:15:44.064Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-638832855927-us-central1/2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip GoogleAccessId=service-638832855927%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1685839544&Signature=xH1iobCdToBfnuuN03eASMJqByGgQusbitRDkodguXdBwYiHarhdxSQWD%2F2wTF9GnW9%2BAu0rAK9ua4fA92R0WUex8ccRUkgAJmKBWZBafyEnKSTtMSmK6uUQLlKWlkbMJPdYUa3RP8EODYWuh8g3HIFF2qeYpG0%2FLG0rxpifKYwU%2BAbZlXx8p1UiM3%2FBPPC6DpG2wXihf6AhjhfubHnGv4NS7onbGjlX6Qust2lpw8NXBPkgtcVAdDR8%2BUqSEIpGmetVIE20kLUwzKkOAwjR6IS2V9fxD1DBCgPbVRXl2spsaBsdIuU0vnaZ%2FsKq4h55ObWvNxhDohLhAVsrYt70Rg%3D%3D
+[debug] [2023-06-04T00:15:44.064Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-638832855927-us-central1/2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip [stream]
+[debug] [2023-06-04T00:15:44.393Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-638832855927-us-central1/2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip 200
+[debug] [2023-06-04T00:15:44.393Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-638832855927-us-central1/2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 18 (2nd Gen) function helloWorld(us-central1)... 
+[debug] [2023-06-04T00:15:44.402Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions functionId=helloWorld
+[debug] [2023-06-04T00:15:44.402Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions {"name":"projects/github-preview-generator/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-uploads-638832855927-us-central1","object":"2025d81f-5ac1-4cd9-915a-1b568fcbacee.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"github-preview-generator\",\"storageBucket\":\"github-preview-generator.appspot.com\"}","GCLOUD_PROJECT":"github-preview-generator","EVENTARC_CLOUD_EVENT_SOURCE":"projects/github-preview-generator/locations/us-central1/services/helloWorld"},"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"9713162fe36cc1d0c6e95dd8579a09b449aa3990"}}
+[debug] [2023-06-04T00:15:45.190Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions 400
+[debug] [2023-06-04T00:15:45.190Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/github-preview-generator/locations/us-central1/functions {"error":{"code":400,"message":"Could not create Cloud Run service helloworld. spec.template.spec.containers.resources.limits.cpu: Invalid value specified for cpu. For the specified value, maxScale may not exceed 10.\nConsider running your workload in a region with greater capacity, decreasing your requested cpu-per-instance, or requesting an increase in quota for this region if you are seeing sustained usage near this limit, see https://cloud.google.com/run/quotas. Your project may gain access to further scaling by adding billing information to your account.","status":"INVALID_ARGUMENT"}}
+[warn] ⚠  functions: Your current project quotas don't allow for the current max instances setting of 100. Either reduce this function's maximum instances, or request a quota increase on the underlying Cloud Run service at https://cloud.google.com/run/quotas. 
+[warn] ⚠  functions: You can adjust the max instances value in your function's runtime options:
+	setGlobalOptions({maxInstances: 10}) 
+[error] Failed to create function projects/github-preview-generator/locations/us-central1/functions/helloWorld
+[debug] [2023-06-04T00:15:45.194Z] Total Function Deployment time: 795
+[debug] [2023-06-04T00:15:45.195Z] 1 Functions Deployed
+[debug] [2023-06-04T00:15:45.195Z] 1 Functions Errored
+[debug] [2023-06-04T00:15:45.195Z] 0 Function Deployments Aborted
+[debug] [2023-06-04T00:15:45.195Z] Average Function Deployment time: 794
+[info] 
+[info] Functions deploy had errors with the following functions:
+	helloWorld(us-central1)
+[debug] [2023-06-04T00:15:45.196Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[info] i  functions: cleaning up build files... 
+[debug] [2023-06-04T00:15:45.199Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/github-preview-generator/locations/us-central1/repositories/gcf-artifacts/packages/hello_world [none]
+[debug] [2023-06-04T00:15:45.201Z] >>> [apiv2][query] GET https://us.gcr.io/v2/github-preview-generator/gcf/us-central1/tags/list [none]
+[debug] [2023-06-04T00:15:45.466Z] <<< [apiv2][status] GET https://us.gcr.io/v2/github-preview-generator/gcf/us-central1/tags/list 200
+[debug] [2023-06-04T00:15:45.466Z] <<< [apiv2][body] GET https://us.gcr.io/v2/github-preview-generator/gcf/us-central1/tags/list {"child":[],"manifest":{},"name":"github-preview-generator/gcf/us-central1","tags":[]}
+[debug] [2023-06-04T00:15:45.467Z] Could not find image for function projects/github-preview-generator/locations/us-central1/functions/helloWorld
+[debug] [2023-06-04T00:15:45.552Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/github-preview-generator/locations/us-central1/repositories/gcf-artifacts/packages/hello_world 404
+[debug] [2023-06-04T00:15:45.552Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/github-preview-generator/locations/us-central1/repositories/gcf-artifacts/packages/hello_world {"error":{"code":404,"message":"Package \"projects/github-preview-generator/locations/us-central1/repositories/gcf-artifacts/packages/hello_world\" was not found.","status":"NOT_FOUND"}}
+[debug] [2023-06-04T00:15:45.553Z] Functions deploy failed.
+[debug] [2023-06-04T00:15:45.553Z] {
+  "endpoint": {
+    "id": "helloWorld",
+    "project": "github-preview-generator",
+    "region": "us-central1",
+    "entryPoint": "helloWorld",
+    "platform": "gcfv2",
+    "runtime": "nodejs18",
+    "httpsTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"github-preview-generator\",\"storageBucket\":\"github-preview-generator.appspot.com\"}",
+      "GCLOUD_PROJECT": "github-preview-generator",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/github-preview-generator/locations/us-central1/services/helloWorld"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": false,
+    "hash": "9713162fe36cc1d0c6e95dd8579a09b449aa3990"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/github-preview-generator/locations/us-central1/functions/helloWorld"
+    },
+    "exit": 1,
+    "message": "Failed to create function projects/github-preview-generator/locations/us-central1/functions/helloWorld",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Could not create Cloud Run service helloworld. spec.template.spec.containers.resources.limits.cpu: Invalid value specified for cpu. For the specified value, maxScale may not exceed 10.\nConsider running your workload in a region with greater capacity, decreasing your requested cpu-per-instance, or requesting an increase in quota for this region if you are seeing sustained usage near this limit, see https://cloud.google.com/run/quotas. Your project may gain access to further scaling by adding billing information to your account.",
+            "status": "INVALID_ARGUMENT"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "HTTP Error: 400, Could not create Cloud Run service helloworld. spec.template.spec.containers.resources.limits.cpu: Invalid value specified for cpu. For the specified value, maxScale may not exceed 10.\nConsider running your workload in a region with greater capacity, decreasing your requested cpu-per-instance, or requesting an increase in quota for this region if you are seeing sustained usage near this limit, see https://cloud.google.com/run/quotas. Your project may gain access to further scaling by adding billing information to your account.",
+      "status": 400
+    },
+    "status": 400
+  }
+}
+[debug] [2023-06-04T00:15:45.555Z] Error: Failed to create function helloWorld in region us-central1
+    at /usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:49:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.createV2Function (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:272:32)
+    at async Fabricator.createEndpoint (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:133:13)
+    at async handle (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:86:17)
+[error] 
+[error] Error: There was an error deploying functions

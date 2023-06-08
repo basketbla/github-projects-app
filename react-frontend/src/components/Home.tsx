@@ -28,6 +28,7 @@ function Home() {
   const [showFAQModal, setShowFAQModal] = useState<boolean>(false);
   const [test, setTest] = useState(0);
   const [animationFinished, setAnimationFinished] = useState(false);
+  const [buttonPressed, setButtonPressed] = useState(false);
 
   // Mark when wave animation done
   useEffect(() => {
@@ -48,11 +49,11 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(animationFinished);
-    if (githubToken != null && animationFinished) {
+    console.log(currentUser);
+    if (githubToken != null && buttonPressed) {
       navigate('/select-projects');
     }
-  }, [githubToken, animationFinished]);
+  }, [githubToken, buttonPressed]);
   
   const githubAuthRedirect = () => {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
@@ -79,6 +80,9 @@ function Home() {
 
   const handleSignIn = async () => {
     await signInWithGithub();
+
+    // Temporary workaround for expiring github auth tokens
+    setButtonPressed(true);
   }
 
   if (!fontsLoaded) {

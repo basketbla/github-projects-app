@@ -51,21 +51,24 @@ app.get('/project-list', async (req, res) => {
     'Authorization': `Bearer ${accessToken}`,
   };
 
+  console.log(accessToken);
+
   // Get username
-  let usernameResponse;
-  try {
-    usernameResponse = await axios.get("https://api.github.com/user", { headers });
-  } catch (error) {
-    console.log("username error");
-  }
-  let username = usernameResponse?.data.login
+  // let usernameResponse;
+  // try {
+  //   usernameResponse = await axios.get("https://api.github.com/user", { headers });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  // let username = usernameResponse?.data.login
 
   // Get list of user repos (public and private)
   let response;
   try {
     response = await axios.get(`https://api.github.com/user/repos?type=all`, { headers });
   } catch (error) {
-    console.log("error with projects");
+    console.log("project error");
+    res.send({});
   }
 
   let ret = response?.data;

@@ -1,0 +1,66 @@
+#preview-container {
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  font-family: 'Poppins';
+  position: relative;
+}
+
+.preview-slide {
+  margin-top: 5%;
+}
+
+.prev-hor-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  box-sizing: border-box;
+}
+
+.slide-image {
+  width: 400px;
+  height: 300px;
+  object-fit: contain;
+  flex: 1;
+}
+
+.preview-text-container {
+  overflow: hidden;
+  flex: 4;
+  margin-left: 30px;
+}
+
+.prev-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.prev-desc {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.prev-sec-label {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.prev-section {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.prev-wave {
+  position: absolute;
+  width: 100vw;
+  bottom: 50px;
+  pointer-events: none;
+}
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+}

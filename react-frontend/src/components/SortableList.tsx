@@ -36,8 +36,9 @@ export default function SortableList(props: any) {
     
     if (active.id !== over.id) {
       props.setItems((items: any) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+        const itemIds = items.map((obj: any) => obj.id);
+        const oldIndex = itemIds.indexOf(active.id);
+        const newIndex = itemIds.indexOf(over.id);
         
         return arrayMove(items, oldIndex, newIndex);
       });

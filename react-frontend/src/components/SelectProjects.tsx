@@ -10,11 +10,17 @@ import axios from 'axios'
 import { SERVER_URL } from '../utils/constants';
 import { useAuth } from '../contexts/AuthContext';
 import { ClimbingBoxLoader } from 'react-spinners';
+import { generatePreview } from '../utils/firebase';
+import { db } from '../utils/firebase';
+import { getDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 export default function SelectProjects() {
 
+  let navigate = useNavigate();
+
   
-  const { githubToken } = useAuth();
+  const { githubToken, currentUser } = useAuth();
   
   // const [includedProjects, setIncludedProjects] = useState(["repoffdfd 1", "repo fd2", "refdsfpo 3", "repo fdsf31", "repofd3 2", "refdpo 33", "rep3ofd 31", "re3fdpo 2", "repofdsf 3", "fdsfdrepo 1", "repfdsfo 2", "repofdfd 3"]);
   const [includedProjects, setIncludedProjects] = useState([]);
@@ -22,13 +28,23 @@ export default function SelectProjects() {
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("Fetching your projects...");
   
-  // Use effect: if user exists in firebase, redirect to projects page
-  // Else, fetch projects
   useEffect(() => {
-    if (githubToken == null) {
-      return;
-    }
     const fetchProjects = async () => {
+      if (githubToken == null) {
+        return;
+      }
+
+      // if user exists in firebase, redirect to projects page
+      // Else, fetch projects
+      // const docRef = doc(db, "projects", currentUser.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+
+      //   // Sleep 2 seconds for animation 
+      //   await new Promise(r => setTimeout(r, 2000));
+      //   navigate(`/${docSnap.data().username}`, { state: {projectData: docSnap.data().includedProjects}});
+      // }
+
       const response = await axios.get(SERVER_URL + "/project-list", {
         params: {
           accessToken: githubToken
@@ -46,9 +62,15 @@ export default function SelectProjects() {
     setLoadingMessage("Generating your previews. This may take a moment...")
     setLoading(true);
 
-    // Have some endpoint
-  }
+    // wait on cloud function that gets all github info and adds it to db
+    await generatePreview({username: "basketbla", accessToken: githubToken, repos: includedProjects})
 
+    // CHANGE THIS TO ACTUALLY RETURN STUFF
+
+    // Go to preview page -> how do we want waves to work?
+    const username = 'basketbla';
+    navigate(`/${username}`);
+  }
   
 
   return (
@@ -88,7 +110,7 @@ export default function SelectProjects() {
             />
           </div>
           <div id="sp-button-container">
-            <MyButton style={{width: '300px', height: '80px', marginTop: '20px'}} title={"Done!"} onClick={getProjectDetails}/>
+            <MyButton style={{width: '300px', height: '80px', marginTop: '20px', zIndex: 1, position: "absolute"}} title={"Done!"} onClick={getProjectDetails}/>
           </div>
         </>
       }
