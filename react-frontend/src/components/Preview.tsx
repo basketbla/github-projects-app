@@ -60,7 +60,7 @@ export default function Preview() {
         modules={[Navigation, Pagination]}
         className="mySwiper"
         style={{ height: '100%' }}
-        allowTouchMove={false}
+        // allowTouchMove={false}
       >
         {
           Object.keys(projects).map((project, idx) => (
@@ -73,18 +73,20 @@ export default function Preview() {
                 />
                 <div className="preview-text-container">
                   <div className="prev-title">{project}</div>
-                  <div className="prev-desc">{projects[project].summary}</div>
-                  <div className="prev-section">
-                    <div className="prev-sec-label">Languages: </div>
-                    {' ' + Object.keys(projects[project].languages).map(lang => ' ' + lang)}
-                  </div>
-                  <div className="prev-section">
-                    <div className="prev-sec-label">My Commits: </div>
-                    {' ' + projects[project].numCommits}
-                  </div>
-                  <div className="prev-section">
-                    <div className="prev-sec-label">Team Size: </div>
-                    {' ' + projects[project].numContributors}
+                  <div className="preview-text-not-title-container">
+                    <div className="prev-desc">{projects[project].summary}</div>
+                    <div className="prev-section">
+                      <div className="prev-sec-label">Languages: </div>
+                      {' ' + Object.keys(projects[project].languages).map(lang => ' ' + lang)}
+                    </div>
+                    <div className="prev-section">
+                      <div className="prev-sec-label">My Commits: </div>
+                      {' ' + projects[project].numCommits}
+                    </div>
+                    <div className="prev-section">
+                      <div className="prev-sec-label">Team Size: </div>
+                      {' ' + projects[project].numContributors}
+                    </div>
                   </div>
                 </div>
               </div>

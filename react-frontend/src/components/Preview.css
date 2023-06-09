@@ -1,7 +1,7 @@
 #preview-container {
   width: 100vw;
   height: 100vh;
-  min-height: 600px;
+  /* min-height: 600px; */
   font-family: 'Poppins';
   position: relative;
 }
@@ -18,6 +18,7 @@
   padding-left: 10%;
   padding-right: 10%;
   box-sizing: border-box;
+  height: 80%;
 }
 
 .slide-image {
@@ -28,9 +29,14 @@
 }
 
 .preview-text-container {
-  overflow: hidden;
   flex: 4;
   margin-left: 30px;
+  /* overflow: scroll; */
+  height: 80%;
+}
+
+.preview-text-not-title-container {
+  overflow: scroll;
 }
 
 .prev-title {
@@ -56,11 +62,42 @@
 
 .prev-wave {
   position: absolute;
-  width: 100vw;
-  bottom: 50px;
+  width: 100%;
+  bottom: 0px;
   pointer-events: none;
+}
+
+.prev-wave svg {
+  bottom: 0px;
 }
 
 .swiper-pagination-bullet {
   background-color: white !important;
+}
+
+
+@media (max-width: 768px) {
+  .slide-image {
+    display: none;
+  }
+
+  .preview-text-not-title-container {
+    overflow: scroll;
+    height: 90%;
+  }
+
+  .prev-title {
+    font-size: 2rem;
+  }
+
+  .prev-desc {
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+
+  .prev-section {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
 }
