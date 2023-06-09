@@ -73,6 +73,11 @@ export default function Preview() {
                 />
                 <div className="preview-text-container">
                   <div className="prev-title">{project}</div>
+                  <img
+                    src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                    alt="project preview"
+                    className="slide-image-under-title"
+                  />
                   <div className="preview-text-not-title-container">
                     <div className="prev-desc">{projects[project].summary}</div>
                     <div className="prev-section">
@@ -87,6 +92,7 @@ export default function Preview() {
                       <div className="prev-sec-label">Team Size: </div>
                       {' ' + projects[project].numContributors}
                     </div>
+                    <div className="padding"/>
                   </div>
                 </div>
               </div>

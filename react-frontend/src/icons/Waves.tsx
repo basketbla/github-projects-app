@@ -17,7 +17,7 @@ export const SelectProjectsWave = <svg width="1440" height="144" viewBox="0 0 14
 // </svg>;
 
 
-const prevWave1 = <svg preserveAspectRatio="none" width="100%" height="15%" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+const prevWave1 = <svg preserveAspectRatio="none" width="100%" height="50vh" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_85_259)">
 <path d="M0 224C96 198 240 61.4746 360 62.0019C480 61.4746 712 193.811 832 193.284C952 193.811 1061 103.295 1191.5 132.652C1316.5 160.771 1320 173.952 1380 183.969L1440 193.284V361.999H1380C1320 361.999 1200 361.999 1080 361.999C960 361.999 840 361.999 720 361.999C600 361.999 480 361.999 360 361.999C240 361.999 120 361.999 60 361.999H0V224Z" fill="#0099FF"/>
 </g>
@@ -30,7 +30,7 @@ const prevWave1 = <svg preserveAspectRatio="none" width="100%" height="15%" view
 
 
 
-const prevWave2 = <svg preserveAspectRatio="none" width="100%" height="15%" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+const prevWave2 = <svg preserveAspectRatio="none" width="100%" height="50vh" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_85_263)">
 <path d="M0 193.285L160 225C241 242 256 261.837 376 253C496 244.163 600 90.5266 720 62.7769C840 33.9667 1017 143.381 1136 179.785C1266 219.554 1369.5 168.014 1440 170.215V353H1380C1320 353 1200 353 1080 353C960 353 840 353 720 353C600 353 480 353 360 353C240 353 120 353 60 353H0V193.285Z" fill="#0099FF"/>
 </g>
@@ -41,11 +41,11 @@ const prevWave2 = <svg preserveAspectRatio="none" width="100%" height="15%" view
 </defs>
 </svg>;
 
-const prevWave3 = <svg preserveAspectRatio="none" width="100%" height="15%" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+const prevWave3 = <svg preserveAspectRatio="none" width="100%" height="50vh" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 170.213C92 170.213 264.5 116.88 384.5 170.213C504.5 221.583 683 227.308 804.5 181.5C980.5 115.145 968.468 95.7215 1080 71.0754C1198 45 1366 69.4473 1426 155.5L1440 181.5V320H1380C1320 320 1200 320 1080 320C960 320 840 320 720 320C600 320 480 320 360 320C240 320 120 320 60 320H0V170.213Z" fill="#0099FF"/>
 </svg>;
 
-const prevWave4 = <svg preserveAspectRatio="none" width="100%" height="15%" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+const prevWave4 = <svg preserveAspectRatio="none" width="100%" height="50vh" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 181C20 210.103 69.5 233.5 111.5 233.5C153.5 233.5 300.5 154.21 474 197.491C569.228 221.247 606 85.5464 702 93.3224C798 101.685 960.5 181.352 1056.5 197.491C1152.5 213.63 1297.5 254 1401.5 231.5L1440 224V320H1392C1344 320 1248 320 1152 320C1056 320 960 320 864 320C768 320 672 320 576 320C480 320 384 320 288 320C192 320 96 320 48 320H0V181Z" fill="#0099FF"/>
 </svg>
 
