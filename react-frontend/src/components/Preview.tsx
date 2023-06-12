@@ -12,9 +12,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { prevWaves } from '../icons/Waves';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../utils/firebase';
+import { db, storage } from '../utils/firebase';
 import { useAuth } from '../contexts/AuthContext';
 import MyModal from './MyModal';
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function Preview() {
   const { username } = useParams();
@@ -32,6 +33,22 @@ export default function Preview() {
   const [editProjectLanguages, setEditProjectLanguages] = useState("");
   const [editProjectCommits, setEditProjectCommits] = useState(0);
   const [editProjectTeamSize, setEditProjectTeamSize] = useState(0);
+  const [editProjectImage, setEditProjectImage] = useState("");
+
+  const [showFunStuffModal, setShowFunStuffModal] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState("http://localhost:3000/basketbla");
+  const [previewUrlCopied, setPreviewUrlCopied] = useState(false);
+  const [iframe, setIframe] = useState(`<iframe id="github-preview-iframe" src="http://localhost:3000/basketbla">`);
+  const [iframeCopied, setIframeCopied] = useState(false);
+  const [iframeStyle, setIframeStyle] = useState(`#my-iframe {
+    width: 600px;
+    height: 300px;
+    border: none;
+    border-radius: 20px;
+  }`);
+  const [iframeStyleCopied, setIframeStyleCopied] = useState(false);
+
+  const [wavesEnabled, setWavesEnabled] = useState(true);
 
   // SHOULD DO SOME CHECK TO SEE IF LOCATION HAS STATE, OTHERWISE FETCH
   useEffect(() => {
@@ -42,6 +59,7 @@ export default function Preview() {
         console.log(docSnap.data());
         setProjects(docSnap.data()?.includedProjects);
         setPreviewUid(docSnap.data()?.uid);
+        setWavesEnabled(docSnap.data()?.wavesEnabled);
         setLoading(false);
       }
       setLoading(false);
@@ -51,6 +69,7 @@ export default function Preview() {
 
   const handleEditProject = (project: any) => {
     setEditProjectProject(project);
+    setEditProjectImage(projects[project].image);
     setEditProjectTitle(projects[project].title);
     setEditProjectDescription(projects[project].summary);
     setEditProjectLanguages(projects[project].languagesString);
@@ -69,7 +88,8 @@ export default function Preview() {
         summary: editProjectDescription,
         languagesString: editProjectLanguages,
         numCommits: editProjectCommits,
-        numContributors: editProjectTeamSize
+        numContributors: editProjectTeamSize,
+        image: editProjectImage,
       }
     });
     projects[editProjectProject] = {
@@ -77,9 +97,43 @@ export default function Preview() {
       summary: editProjectDescription,
       languagesString: editProjectLanguages,
       numCommits: editProjectCommits,
-      numContributors: editProjectTeamSize
+      numContributors: editProjectTeamSize,
+      image: editProjectImage,
     };
     setLoading(false);
+  }
+
+  const updateProjectPic = async (projectPicFile: any, project: any) => {
+
+    // Using firebase cloud storage for project pic
+    const storageRef = ref(storage, 'projectPic/' + currentUser.uid + '/' + project);
+    const uploadSnapshot = await uploadBytes(storageRef, projectPicFile);
+    const newPicUrl = await getDownloadURL(storageRef);
+
+    setEditProjectImage(newPicUrl);
+  }
+
+  const copyPreviewUrl = () => {
+    navigator.clipboard.writeText(previewUrl);
+    setPreviewUrlCopied(true);
+  }
+  const copyIframe = () => {
+    navigator.clipboard.writeText(iframe);
+    setIframeCopied(true);
+  }
+  const copyIframeStyle = () => {
+    navigator.clipboard.writeText(iframeStyle);
+    setIframeStyleCopied(true);
+  }
+
+  const handleCheckWaves = (e: any) => {
+    setWavesEnabled(e.target.checked);
+
+    const docRef = doc(db, `projects/${username}`);
+    updateDoc(docRef, {
+      wavesEnabled: e.target.checked,
+    });
+
   }
 
   if (loading) {
@@ -88,6 +142,83 @@ export default function Preview() {
 
   return (
     <div id="preview-container" style={{overflow: 'hidden'}}>
+      {
+        (currentUser != null && currentUser.uid === previewUid && !showFunStuffModal) &&
+        <div className="fun-button" onClick={() => setShowFunStuffModal(true)}>
+          <svg width="69" height="51" viewBox="0 0 69 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="69" height="9" rx="4.5" fill="#0099FF"/>
+          <rect y="21" width="69" height="9" rx="4.5" fill="#0099FF"/>
+          <rect y="42" width="69" height="9" rx="4.5" fill="#0099FF"/>
+          </svg>
+        </div>
+      }
+      <MyModal 
+        modalStyle={{width: "50%", height: "80%", padding: "50px", overflow: "scroll"}}
+        show={showFunStuffModal} 
+        setShow={setShowFunStuffModal}
+      >
+        <div id="preview-url-label-container">
+            <div id="copy-url-container" onClick={copyPreviewUrl}>
+              {
+                previewUrlCopied ?
+                <>
+                  <ion-icon name="checkmark-outline" id="url-copied-check" style={{fontSize: '1.5rem'}}/>
+                  Copied!
+                </>
+                :
+                <>
+                  <ion-icon name="copy-outline" id="copy-url-button" style={{fontSize: '1.5rem'}}></ion-icon>
+                  Copy URL
+                </>
+              }
+            </div>
+          </div>
+          <div className="preview-url">
+            {previewUrl}
+          </div>
+          <div id="preview-url-label-container">
+            <div id="copy-url-container" onClick={copyIframe}>
+              {
+                iframeCopied ?
+                <>
+                  <ion-icon name="checkmark-outline" id="url-copied-check" style={{fontSize: '1.5rem'}}/>
+                  Copied!
+                </>
+                :
+                <>
+                  <ion-icon name="copy-outline" id="copy-url-button" style={{fontSize: '1.5rem'}}></ion-icon>
+                  Copy Iframe
+                </>
+              }
+            </div>
+          </div>
+          <div className="preview-url">
+            {iframe}
+          </div>
+          <div id="preview-url-label-container">
+            <div id="copy-url-container" onClick={copyIframeStyle}>
+              {
+                iframeStyleCopied ?
+                <>
+                  <ion-icon name="checkmark-outline" id="url-copied-check" style={{fontSize: '1.5rem'}}/>
+                  Copied!
+                </>
+                :
+                <>
+                  <ion-icon name="copy-outline" id="copy-url-button" style={{fontSize: '1.5rem'}}></ion-icon>
+                  Copy Iframe Example Style
+                </>
+              }
+            </div>
+          </div>
+          <div className="preview-url">
+            {iframeStyle}
+          </div>
+          <div className="waves-enabled-container">
+            <div className="waves-enabled-label">Waves Enabled</div>
+            <input type="checkbox" checked={wavesEnabled} className="waves-enabled-check" onChange={handleCheckWaves}/>
+          </div>
+      </MyModal>
       <MyModal
         modalStyle={{width: "50%", height: "80%", padding: "50px", overflow: "scroll"}} 
         show={showEditPageModal} 
@@ -96,6 +227,14 @@ export default function Preview() {
       >
         <div className="prev-title-label">Project:</div>
         <textarea className="prev-edit-textarea" value={editProjectTitle} onChange={e => setEditProjectTitle(e.target.value)}/>
+        <input type="file" id="profile-pic-file-input" style={{display: 'none'}} onChange={(e) => updateProjectPic(e.target.files?.[0], editProjectProject)}></input>
+        <div className="project-pic-label">Preview Image:</div>
+        <div className="edit-project-pic-section">
+          <img className="edit-project-pic-pic" src={editProjectImage} alt="profile pic" onClick={() => {document.getElementById('profile-pic-file-input')?.click()}}/>
+          <div className="edit-project-pic-text">
+            <div className="edit-project-pic-button" onClick={() => {document.getElementById('profile-pic-file-input')?.click()}}>Select New Image</div>
+          </div>
+        </div>
         <div className="prev-desc-label">Description</div>
         <textarea className="prev-edit-textarea-desc" value={editProjectDescription} onChange={e => setEditProjectDescription(e.target.value)}/>
         <div className="prev-desc-label">Languages</div>
@@ -107,6 +246,18 @@ export default function Preview() {
         <div className="prev-submit-container">
           <div className="prev-submit-edits" onClick={handleSubmitEdits}>Submit</div>
         </div>
+        <ion-icon 
+          name="close-outline"
+          style={{
+            color: 'lightgrey', 
+            fontSize: '1.5rem', 
+            cursor: 'pointer',
+            position: 'absolute',
+            top: 5,
+            left: 5,
+          }}
+          onClick={() => setShowEditPageModal(false)}
+        />
       </MyModal>
       {/* {username} */}
       {/* <>
@@ -127,14 +278,16 @@ export default function Preview() {
             <SwiperSlide className="preview-slide">
               <div className="prev-hor-container">
                 <img
-                  src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                  src={projects[project].image}
+                  // src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
                   alt="project preview"
                   className="slide-image"
                 />
                 <div className="preview-text-container">
                   <div className="prev-title">{projects[project].title}</div>
                   <img
-                    src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                    // src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                    src={projects[project].image}              
                     alt="project preview"
                     className="slide-image-under-title"
                   />
@@ -160,7 +313,7 @@ export default function Preview() {
                   </div>
                 </div>
               </div>
-              <div className="prev-wave">
+              <div className="prev-wave" style={{display: wavesEnabled ? 'unset': 'none'}}>
                 {prevWaves[idx % 4]}
               </div>
             </SwiperSlide>

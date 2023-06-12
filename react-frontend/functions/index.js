@@ -22,9 +22,9 @@ const generatePrompt = (readme) => {
 
   {"summary": "[SUMMARY]", "image": "[IMAGE]"}
 
-  or if no image is found, just
+  or if no image is found, do
 
-  {"summary": "[SUMMARY]"}
+  {"summary": "[SUMMARY]", "image": "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
 
 ` + readme.substr(0, 500);
 };

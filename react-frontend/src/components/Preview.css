@@ -61,6 +61,7 @@
 .prev-desc {
   margin-bottom: 20px;
   font-size: 1.2rem;
+  white-space: pre-line !important;
 }
 
 .prev-sec-label {
@@ -145,6 +146,64 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.edit-project-pic-pic {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+.project-pic-label {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.edit-project-pic-button {
+  color: #0099FF;
+  cursor: pointer;
+}
+
+.fun-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#copy-url-container {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.preview-url {
+  border: 1px solid grey;
+  border-radius: 5px; /* Adjust the value to achieve the desired curvature */
+  padding: 10px;
+  overflow: scroll;
+  margin-bottom: 20px;
+}
+
+.waves-enabled-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.waves-enabled-label {
+  font-weight: bold;
+}
+
+.waves-enabled-check {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
 }
 
 
