@@ -49,6 +49,8 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
     repo = repo.name;
     repoData = {};
 
+    repoData.title = repo;
+
     // Get readmes
     try {
       readmeResponse = await axios.get(`https://raw.githubusercontent.com/${username}/${repo}/main/README.md`, {headers});
@@ -74,6 +76,8 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
     try {
       languageResponse = await axios.get(`https://api.github.com/repos/${username}/${repo}/languages`, {headers});
       repoData.languages = languageResponse?.data;
+      repoData.languagesString = String(Object.keys(languageResponse?.data)
+          .map((lang) => " " + lang)).substring(1);
     } catch (error) {
       console.log("error with languages");
     }

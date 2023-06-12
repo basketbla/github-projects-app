@@ -8,7 +8,6 @@
 
 .preview-slide {
   margin-top: 5%;
-  height: 60%;
 }
 
 .prev-hor-container {
@@ -87,6 +86,65 @@
 
 .swiper-pagination-bullet {
   background-color: white !important;
+}
+
+.edit-project-button {
+  background-color: rgb(180, 180, 180);
+  width: 200px;
+  height: 60px;
+  margin-top: 20px;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.prev-title-label {
+  font-weight: bold;
+}
+
+.prev-desc-label {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.prev-edit-textarea {
+  font-family: 'Poppins';
+  resize: none;
+  width: 100%;
+  height: 20px;
+}
+
+.prev-edit-textarea-desc {
+  font-family: 'Poppins';
+  resize: vertical;
+  width: 100%;
+}
+
+.prev-submit-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.prev-submit-edits {
+  background-color: #0099FF;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 
