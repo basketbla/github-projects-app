@@ -11,11 +11,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { prevWaves } from '../icons/Waves';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../utils/firebase';
 import { useAuth } from '../contexts/AuthContext';
 import MyModal from './MyModal';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ClimbingBoxLoader } from 'react-spinners';
 
 export default function Preview() {
 
@@ -51,6 +52,8 @@ export default function Preview() {
   const [iframeStyleCopied, setIframeStyleCopied] = useState(false);
 
   const [wavesEnabled, setWavesEnabled] = useState(true);
+  const [showRemoveConfirmModal, setShowRemoveConfirmModal] = useState(false);
+  const [showLoadingModal, setShowLoadingModal] = useState(false);
 
   // SHOULD DO SOME CHECK TO SEE IF LOCATION HAS STATE, OTHERWISE FETCH
   useEffect(() => {
@@ -138,6 +141,22 @@ export default function Preview() {
 
   }
 
+  const handleRemoveProject = async () => {
+    setShowRemoveConfirmModal(false);
+    setShowEditPageModal(false);
+    setShowLoadingModal(true);
+
+    const docRef = doc(db, "projects", username ?? "");
+    let projectsCopy = projects;
+    delete projectsCopy[editProjectProject];
+    setProjects(projectsCopy);
+    await updateDoc(docRef, {
+      includedProejcts: projectsCopy
+    });
+
+    setShowLoadingModal(false);
+  }
+
   if (loading) {
     return <div>DO LOAING </div>
   }
@@ -147,7 +166,7 @@ export default function Preview() {
       {
         (currentUser != null && currentUser.uid === previewUid && !showFunStuffModal) &&
         <div className="fun-button" onClick={() => setShowFunStuffModal(true)}>
-          <ion-icon name="hammer-outline" style={{fontSize: '2rem', color: "grey"}}/>
+          <ion-icon name="clipboard-outline" style={{fontSize: '2rem', color: "grey"}}/>
         </div>
       }
       <MyModal 
@@ -244,7 +263,7 @@ export default function Preview() {
         <input type="number" value={editProjectCommits} onChange={e => setEditProjectCommits(Number(e.target.value))}/>
         <div className="prev-desc-label">Team Size</div>
         <input type="number" value={editProjectTeamSize} onChange={e => setEditProjectTeamSize(Number(e.target.value))}/>
-        <div className="remove-project-button">Remove Project</div>
+        <div className="remove-project-button" onClick={() => setShowRemoveConfirmModal(true)}>Remove Project</div>
         <div className="prev-submit-container">
           <div className="prev-submit-edits" onClick={handleSubmitEdits}>Submit</div>
         </div>
@@ -260,6 +279,26 @@ export default function Preview() {
           }}
           onClick={() => setShowEditPageModal(false)}
         />
+      </MyModal>
+      <MyModal 
+        modalStyle={{width: "20%", padding: "20px", overflow: "scroll", top: 20}}
+        show={showRemoveConfirmModal} 
+        setShow={setShowRemoveConfirmModal}
+      >
+        <div className="remove-confirm-title">Are you sure you want to remove the project "{editProjectProject}"?</div>
+        <div className="remove-buttons-container">
+          <div className="cancel-button" onClick={() => setShowRemoveConfirmModal(false)}>Cancel</div>
+          <div className="remove-project-button" onClick={handleRemoveProject}>Remove Project</div>
+        </div>
+      </MyModal>
+      <MyModal 
+        modalStyle={{padding: "100px", overflow: "scroll"}}
+        show={showLoadingModal} 
+      >
+        <div className="preview-modal-loading-container">
+          <ClimbingBoxLoader color="#0099FF" size={20}/>
+          <div className="preview-modal-loading-title">Removing project "{editProjectProject}"...</div>
+        </div>
       </MyModal>
       {/* {username} */}
       {/* <>
