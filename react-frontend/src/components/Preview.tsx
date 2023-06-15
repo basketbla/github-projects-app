@@ -147,18 +147,23 @@ export default function Preview() {
     setShowLoadingModal(true);
 
     const docRef = doc(db, "projects", username ?? "");
-    let projectsCopy = projects;
+    let projectsCopy = {...projects};
     delete projectsCopy[editProjectProject];
     setProjects(projectsCopy);
+    console.log("projects copy", projectsCopy);
     await updateDoc(docRef, {
-      includedProejcts: projectsCopy
+      includedProjects: projectsCopy
     });
 
     setShowLoadingModal(false);
   }
 
   if (loading) {
-    return <div>DO LOAING </div>
+    return (
+      <div className="preview-big-loading-container">
+        <ClimbingBoxLoader color="#0099FF" size={30}/>
+      </div>
+    )         
   }
 
   return (
