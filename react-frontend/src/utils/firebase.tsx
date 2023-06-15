@@ -31,3 +31,5 @@ export const storage = getStorage();
 // Cloud funcs
 export const functions = getFunctions(app);
 export const generatePreview = httpsCallable(functions, 'generatePreview');
+export const getProjectList = httpsCallable(functions, 'getProjectList');
+export const testingPersist = httpsCallable(functions, 'testingPersist');

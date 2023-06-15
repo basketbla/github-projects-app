@@ -6,6 +6,7 @@ import TestSortable from './components/SortableList';
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import SlideRoutes from 'react-slide-routes';
 import Preview from './components/Preview';
+import TestingFirebase from './components/TestingFirebase';
 
 function App() {
 
@@ -13,12 +14,18 @@ function App() {
 
   return (
     <div id="app-container">
-      <SlideRoutes duration={2000}>
+      {/* <SlideRoutes duration={2000}>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/select-projects' element={<SelectProjects/>}/>
+        <Route path='*' element={<Home/>}/>
+      </SlideRoutes> */}
+      <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/select-projects' element={<SelectProjects/>}/>
         <Route path='/:username' element={<Preview/>}/>
+        <Route path='/testing-firebase' element={<TestingFirebase/>}/>
         <Route path='*' element={<Home/>}/>
-      </SlideRoutes>
+      </Routes>
     </div>
   );
 }

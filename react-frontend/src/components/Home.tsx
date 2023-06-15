@@ -152,6 +152,10 @@ function Home() {
           <div className="faq-body">
             No. The easiest workaround I've found is just to fork them. Even if they are private, you'll still be able to get stats like your commits and such.
           </div>
+          <div className="faq-subtitle">Do projects get overwritten if I reselect projects?</div>
+          <div className="faq-body">
+            No. All existing projects will remain after you reselect projects. If you want to get rid of a project, delete it before reselecting projects.
+          </div>
         </MyModal>
         <div id="home-faq" onClick={() => setShowFAQModal(true)}>
           FAQ

@@ -167,8 +167,8 @@
 
 .fun-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   cursor: pointer;
   z-index: 10;
 }
@@ -204,6 +204,36 @@
   cursor: pointer;
   width: 20px;
   height: 20px;
+}
+
+.reselect-projects-button {
+  background-color: #0099FF;
+  color: white;
+  font-weight: bold;
+  border-radius: 15px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.remove-project-button {
+  background-color: rgb(177, 57, 57);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 

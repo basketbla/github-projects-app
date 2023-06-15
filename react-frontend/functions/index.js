@@ -22,10 +22,6 @@ const generatePrompt = (readme) => {
 
   {"summary": "[SUMMARY]", "image": "[IMAGE]"}
 
-  or if no image is found, do
-
-  {"summary": "[SUMMARY]", "image": "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
-
 ` + readme.substr(0, 500);
 };
 
@@ -36,8 +32,23 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
   const headers = {
     "Authorization": `Bearer ${data.accessToken}`,
   };
+
   const username = data.username;
   const ret = {};
+
+  const colRef = db.collection("projects");
+
+  const existingSnapshot = await colRef.doc(username).get();
+  if (existingSnapshot.exists) {
+    const existingData = existingSnapshot.data();
+    for (const key in existingData.includedProjects) {
+      if (!(key in ret)) {
+        ret[key] = existingData.includedProjects[key];
+      }
+    }
+  }
+
+
   let repoData;
   let readmeResponse;
   let languageResponse;
@@ -45,10 +56,19 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
   let contributorsResponse;
   let openaiResponse;
   let openaiObj;
+  let idx = Object.keys(ret).length;
   for (let repo of data.repos) {
     repo = repo.name;
+
+    // Project summary already exists, continue
+    if (repo in ret) {
+      continue;
+    }
+
     repoData = {};
 
+    repoData.idx = idx;
+    idx++;
     repoData.title = repo;
 
     // Get readmes
@@ -67,7 +87,6 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
       repoData.summary = openaiObj.summary;
       repoData.image = openaiObj.image;
     } catch (error) {
-      console.log(error);
       console.log("error with readmes");
     }
 
@@ -103,12 +122,47 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
 
   const bigRet = {
     username: username,
+    uid: context.auth.uid,
+    wavesEnabled: true,
     includedProjects: ret,
   };
 
-  // Add this to firebase.
+  // Add metadata in case it isn't there
+  await colRef.doc(username).update(bigRet);
+
+  return ret;
+});
+
+exports.getProjectList = functions.https.onCall(async (data, context) => {
+  const headers = {
+    "Authorization": `Bearer ${data.accessToken}`,
+  };
+
+  let response;
+  try {
+    response = await axios.get(`https://api.github.com/user/repos?type=all`, {headers});
+  } catch (error) {
+    console.log("project error");
+    return {};
+  }
+
+  return response?.data;
+});
+
+exports.testingPersist = functions.https.onCall(async (data, context) => {
   const colRef = db.collection("projects");
-  await colRef.doc(username).set(bigRet);
+
+  const ret = {};
+
+  const existingSnapshot = await colRef.doc("basketbla").get();
+  if (existingSnapshot.exists) {
+    const existingData = existingSnapshot.data();
+    for (const key in existingData.includedProjects) {
+      if (!(key in ret)) {
+        ret[key] = existingData.includedProjects[key];
+      }
+    }
+  }
 
   return ret;
 });

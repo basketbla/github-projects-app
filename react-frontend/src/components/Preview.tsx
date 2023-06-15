@@ -3,7 +3,7 @@ import React, {
   useState,
   useEffect
 } from 'react'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from "swiper";
 import { Pagination } from "swiper";
@@ -18,6 +18,8 @@ import MyModal from './MyModal';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function Preview() {
+
+  let navigate = useNavigate();
   const { username } = useParams();
   const location = useLocation();
 
@@ -40,7 +42,7 @@ export default function Preview() {
   const [previewUrlCopied, setPreviewUrlCopied] = useState(false);
   const [iframe, setIframe] = useState(`<iframe id="github-preview-iframe" src="http://localhost:3000/basketbla">`);
   const [iframeCopied, setIframeCopied] = useState(false);
-  const [iframeStyle, setIframeStyle] = useState(`#my-iframe {
+  const [iframeStyle, setIframeStyle] = useState(`#github-preview-iframe {
     width: 600px;
     height: 300px;
     border: none;
@@ -69,7 +71,7 @@ export default function Preview() {
 
   const handleEditProject = (project: any) => {
     setEditProjectProject(project);
-    setEditProjectImage(projects[project].image);
+    setEditProjectImage(projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c");
     setEditProjectTitle(projects[project].title);
     setEditProjectDescription(projects[project].summary);
     setEditProjectLanguages(projects[project].languagesString);
@@ -145,11 +147,7 @@ export default function Preview() {
       {
         (currentUser != null && currentUser.uid === previewUid && !showFunStuffModal) &&
         <div className="fun-button" onClick={() => setShowFunStuffModal(true)}>
-          <svg width="69" height="51" viewBox="0 0 69 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="69" height="9" rx="4.5" fill="#0099FF"/>
-          <rect y="21" width="69" height="9" rx="4.5" fill="#0099FF"/>
-          <rect y="42" width="69" height="9" rx="4.5" fill="#0099FF"/>
-          </svg>
+          <ion-icon name="hammer-outline" style={{fontSize: '2rem', color: "grey"}}/>
         </div>
       }
       <MyModal 
@@ -218,6 +216,9 @@ export default function Preview() {
             <div className="waves-enabled-label">Waves Enabled</div>
             <input type="checkbox" checked={wavesEnabled} className="waves-enabled-check" onChange={handleCheckWaves}/>
           </div>
+          <div className="reselect-projects-button" onClick={() => navigate('/select-projects')}>
+            Reselect Projects
+          </div>
       </MyModal>
       <MyModal
         modalStyle={{width: "50%", height: "80%", padding: "50px", overflow: "scroll"}} 
@@ -230,7 +231,7 @@ export default function Preview() {
         <input type="file" id="profile-pic-file-input" style={{display: 'none'}} onChange={(e) => updateProjectPic(e.target.files?.[0], editProjectProject)}></input>
         <div className="project-pic-label">Preview Image:</div>
         <div className="edit-project-pic-section">
-          <img className="edit-project-pic-pic" src={editProjectImage} alt="profile pic" onClick={() => {document.getElementById('profile-pic-file-input')?.click()}}/>
+          <img className="edit-project-pic-pic" src={editProjectImage} alt="project pic" onClick={() => {document.getElementById('profile-pic-file-input')?.click()}}/>
           <div className="edit-project-pic-text">
             <div className="edit-project-pic-button" onClick={() => {document.getElementById('profile-pic-file-input')?.click()}}>Select New Image</div>
           </div>
@@ -243,6 +244,7 @@ export default function Preview() {
         <input type="number" value={editProjectCommits} onChange={e => setEditProjectCommits(Number(e.target.value))}/>
         <div className="prev-desc-label">Team Size</div>
         <input type="number" value={editProjectTeamSize} onChange={e => setEditProjectTeamSize(Number(e.target.value))}/>
+        <div className="remove-project-button">Remove Project</div>
         <div className="prev-submit-container">
           <div className="prev-submit-edits" onClick={handleSubmitEdits}>Submit</div>
         </div>
@@ -274,20 +276,23 @@ export default function Preview() {
         // allowTouchMove={false}
       >
         {
-          Object.keys(projects).map((project, idx) => (
+          Object
+          .keys(projects).sort(function(a, b){
+              return projects[a].idx - projects[b].idx;
+          }).map((project, idx) => (
             <SwiperSlide className="preview-slide">
               <div className="prev-hor-container">
                 <img
-                  src={projects[project].image}
-                  // src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                  // src={projects[project].image ?? "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                  src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
                   alt="project preview"
                   className="slide-image"
                 />
                 <div className="preview-text-container">
                   <div className="prev-title">{projects[project].title}</div>
                   <img
-                    // src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
-                    src={projects[project].image}              
+                    src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                    // src={projects[project].image ?? "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}              
                     alt="project preview"
                     className="slide-image-under-title"
                   />

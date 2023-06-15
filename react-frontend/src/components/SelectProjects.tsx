@@ -10,7 +10,7 @@ import axios from 'axios'
 import { SERVER_URL } from '../utils/constants';
 import { useAuth } from '../contexts/AuthContext';
 import { ClimbingBoxLoader } from 'react-spinners';
-import { generatePreview } from '../utils/firebase';
+import { generatePreview, getProjectList } from '../utils/firebase';
 import { db } from '../utils/firebase';
 import { getDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -45,12 +45,12 @@ export default function SelectProjects() {
       //   navigate(`/${docSnap.data().username}`, { state: {projectData: docSnap.data().includedProjects}});
       // }
 
-      const response = await axios.get(SERVER_URL + "/project-list", {
-        params: {
-          accessToken: githubToken
-        }
-      });
-      console.log(response.data);
+      // const response = await axios.get(SERVER_URL + "/project-list", {
+      //   params: {
+      //     accessToken: githubToken
+      //   }
+      // });
+      const response: any = await getProjectList({ accessToken: githubToken });
       setIncludedProjects(response.data);
       setLoading(false);
     }
