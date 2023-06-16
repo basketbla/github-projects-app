@@ -290,6 +290,21 @@
   color: black;
 }
 
+#preview-credit {
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  z-index: 110;
+  color: white;
+  animation: textFadeIn 2000ms;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  width: auto;
+  height: 20vh;
+  max-height: 100px;
+}
+
 
 @media (max-width: 768px) {
   .slide-image {
