@@ -81,7 +81,7 @@ export default function Preview() {
     setEditProjectTitle(projects[project].title);
     setEditProjectDescription(projects[project].summary ?? "");
     setEditProjectLanguages(projects[project].languagesString);
-    setEditProjectCommits(projects[project].numCommits);
+    setEditProjectCommits(projects[project].numCommits ?? 0);
     setEditProjectTeamSize(projects[project].numContributors);
     setEditProjectIdx(projects[project].idx);
     setShowEditPageModal(true);
