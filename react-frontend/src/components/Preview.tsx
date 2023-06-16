@@ -369,9 +369,9 @@ export default function Preview() {
                     <div className="padding"/>
                   </div>
                 </div>
-                <a id="preview-credit" href="https://gpg.bio/" rel='noreferrer' target="_blank">
+                {/* <a id="preview-credit" href="https://gpg.bio/" rel='noreferrer' target="_blank">
                   Preview by GPG
-                </a>
+                </a> */}
               </div>
               <div className="prev-wave" style={{display: wavesEnabled ? 'unset': 'none'}}>
                 {prevWaves[idx % 4]}
