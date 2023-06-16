@@ -79,7 +79,7 @@ export default function Preview() {
     setEditProjectProject(project);
     setEditProjectImage(projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c");
     setEditProjectTitle(projects[project].title);
-    setEditProjectDescription(projects[project].summary);
+    setEditProjectDescription(projects[project].summary ?? "");
     setEditProjectLanguages(projects[project].languagesString);
     setEditProjectCommits(projects[project].numCommits);
     setEditProjectTeamSize(projects[project].numContributors);
