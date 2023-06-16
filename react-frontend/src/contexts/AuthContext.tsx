@@ -5,7 +5,7 @@ import React, {
   useEffect
 } from 'react';
 import { auth, } from '../utils/firebase'
-import { getAuth, signInWithPopup, GithubAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup, GithubAuthProvider, onAuthStateChanged } from "firebase/auth";
 
 interface IContextProps {
   currentUser: any;

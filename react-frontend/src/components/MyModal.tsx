@@ -1,6 +1,5 @@
 import './MyModal.css'
 import React, {
-  useEffect
 } from 'react'
 
 export default function MyModal(props: any) {
