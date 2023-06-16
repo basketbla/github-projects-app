@@ -319,7 +319,7 @@ export default function Preview() {
         modules={[Navigation, Pagination]}
         className="mySwiper"
         style={{ height: '100%' }}
-        // allowTouchMove={false}
+        allowTouchMove={false}
       >
         {
           Object
