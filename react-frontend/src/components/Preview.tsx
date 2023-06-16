@@ -47,6 +47,7 @@ export default function Preview() {
   const [editProjectCommits, setEditProjectCommits] = useState(0);
   const [editProjectTeamSize, setEditProjectTeamSize] = useState(0);
   const [editProjectImage, setEditProjectImage] = useState("");
+  const [editProjectIdx, setEditProjectIdx] = useState(0);
 
   const [showFunStuffModal, setShowFunStuffModal] = useState(false);
   const [previewUrlCopied, setPreviewUrlCopied] = useState(false);
@@ -82,6 +83,7 @@ export default function Preview() {
     setEditProjectLanguages(projects[project].languagesString);
     setEditProjectCommits(projects[project].numCommits);
     setEditProjectTeamSize(projects[project].numContributors);
+    setEditProjectIdx(projects[project].idx);
     setShowEditPageModal(true);
   }
 
@@ -97,6 +99,7 @@ export default function Preview() {
         numCommits: editProjectCommits,
         numContributors: editProjectTeamSize,
         image: editProjectImage,
+        idx: editProjectIdx,
       }
     });
     projects[editProjectProject] = {
@@ -106,6 +109,7 @@ export default function Preview() {
       numCommits: editProjectCommits,
       numContributors: editProjectTeamSize,
       image: editProjectImage,
+      idx: editProjectIdx,
     };
     setLoading(false);
   }
