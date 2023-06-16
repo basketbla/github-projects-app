@@ -3,9 +3,9 @@ import React, {
   useEffect
 } from 'react';
 import './Home.css';
-import axios from 'axios'
-import { useLocation, useNavigate } from 'react-router-dom';
-import { APP_URL, CLIENT_ID, SERVER_URL } from '../utils/constants';
+// import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+// import { CLIENT_ID, SERVER_URL } from '../utils/constants';
 import SelectProjects from '../icons/SelectProjectsIcon'
 import PreviewIcon from '../icons/PreviewIcon'
 import MyButton from './MyButton';
@@ -16,28 +16,28 @@ import { HomeWave } from '../icons/Waves';
 
 function Home() {
 
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
 
   const { signInWithGithub, currentUser, githubToken } = useAuth();
 
-  const searchParams = new URLSearchParams(location.search);
-  const [accessToken, setAccessToken] = useState<any | null>(null);
-  const [projects, setProjects] = useState<any>({});
+  // const searchParams = new URLSearchParams(location.search);
+  // const [accessToken, setAccessToken] = useState<any | null>(null);
+  // const [projects, setProjects] = useState<any>({});
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [showFAQModal, setShowFAQModal] = useState<boolean>(false);
-  const [test, setTest] = useState(0);
-  const [animationFinished, setAnimationFinished] = useState(false);
+  // const [test, setTest] = useState(0);
+  // const [animationFinished, setAnimationFinished] = useState(false);
   const [buttonPressed, setButtonPressed] = useState(false);
 
   // Mark when wave animation done
-  useEffect(() => {
-    const markAnimationsDone = async () => {
-      await new Promise(r => setTimeout(r, 2000));
-      setAnimationFinished(true);
-    }
-    markAnimationsDone();
-  }, []);
+  // useEffect(() => {
+  //   const markAnimationsDone = async () => {
+  //     await new Promise(r => setTimeout(r, 2000));
+  //     setAnimationFinished(true);
+  //   }
+  //   markAnimationsDone();
+  // }, []);
 
 
   useEffect(() => {
@@ -49,34 +49,33 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(currentUser);
     if (githubToken != null && buttonPressed) {
       navigate('/select-projects');
     }
-  }, [githubToken, buttonPressed]);
+  }, [githubToken, buttonPressed, currentUser, navigate]);
   
-  const githubAuthRedirect = () => {
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
-  }
+  // const githubAuthRedirect = () => {
+  //   window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
+  // }
 
-  const fetchGithubToken = async () => {
-    const result = await axios.post(SERVER_URL + "/code-for-token", {
-      code: searchParams.get('code'),
-    });
-    console.log(result.data);
-    const responseParams = new URLSearchParams(result.data);
-    setAccessToken(responseParams.get('access_token'));
-  }
+  // const fetchGithubToken = async () => {
+  //   const result = await axios.post(SERVER_URL + "/code-for-token", {
+  //     code: searchParams.get('code'),
+  //   });
+  //   console.log(result.data);
+  //   const responseParams = new URLSearchParams(result.data);
+  //   setAccessToken(responseParams.get('access_token'));
+  // }
 
-  const fetchProjects = async () => {
-    const response = await axios.get(SERVER_URL + "/project-list", {
-      params: {
-        accessToken: accessToken
-      }
-    });
-    console.log(response.data);
-    setProjects(response.data);
-  }
+  // const fetchProjects = async () => {
+  //   const response = await axios.get(SERVER_URL + "/project-list", {
+  //     params: {
+  //       accessToken: accessToken
+  //     }
+  //   });
+  //   console.log(response.data);
+  //   setProjects(response.data);
+  // }
 
   const handleSignIn = async () => {
     await signInWithGithub();

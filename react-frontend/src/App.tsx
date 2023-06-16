@@ -1,16 +1,16 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import SelectProjects from './components/SelectProjects';
-import TestSortable from './components/SortableList';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import SlideRoutes from 'react-slide-routes';
+// import TestSortable from './components/SortableList';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group'
+// import SlideRoutes from 'react-slide-routes';
 import Preview from './components/Preview';
 import TestingFirebase from './components/TestingFirebase';
 
 function App() {
 
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
     <div id="app-container">

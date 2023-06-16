@@ -6,13 +6,13 @@ import React, {
 import SortableList from './SortableList'
 import MyButton from './MyButton';
 import { SelectProjectsWave } from '../icons/Waves';
-import axios from 'axios'
-import { SERVER_URL } from '../utils/constants';
+// import axios from 'axios'
+// import { SERVER_URL } from '../utils/constants';
 import { useAuth } from '../contexts/AuthContext';
 import { ClimbingBoxLoader } from 'react-spinners';
 import { generatePreview, getProjectList } from '../utils/firebase';
-import { db } from '../utils/firebase';
-import { getDoc, doc } from 'firebase/firestore';
+// import { db } from '../utils/firebase';
+// import { getDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 export default function SelectProjects() {
@@ -20,7 +20,7 @@ export default function SelectProjects() {
   let navigate = useNavigate();
 
   
-  const { githubToken, currentUser } = useAuth();
+  const { githubToken } = useAuth();
   
   // const [includedProjects, setIncludedProjects] = useState(["repoffdfd 1", "repo fd2", "refdsfpo 3", "repo fdsf31", "repofd3 2", "refdpo 33", "rep3ofd 31", "re3fdpo 2", "repofdsf 3", "fdsfdrepo 1", "repfdsfo 2", "repofdfd 3"]);
   const [includedProjects, setIncludedProjects] = useState([]);

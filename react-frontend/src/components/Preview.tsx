@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { prevWaves } from '../icons/Waves';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../utils/firebase';
 import { useAuth } from '../contexts/AuthContext';
 import MyModal from './MyModal';
@@ -24,6 +24,15 @@ export default function Preview() {
   let navigate = useNavigate();
   const { username } = useParams();
   const location = useLocation();
+
+  const previewUrl = DOMAIN + "/" + username;
+  const iframe = `<iframe id="github-preview-iframe" src="${DOMAIN + "/" + username}"></iframe>`;
+  const iframeStyle = `#github-preview-iframe {
+    width: 600px;
+    height: 300px;
+    border: none;
+    border-radius: 20px;
+  }`;
 
   const { currentUser } = useAuth();
 
@@ -40,16 +49,8 @@ export default function Preview() {
   const [editProjectImage, setEditProjectImage] = useState("");
 
   const [showFunStuffModal, setShowFunStuffModal] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState(DOMAIN + "/" + username);
   const [previewUrlCopied, setPreviewUrlCopied] = useState(false);
-  const [iframe, setIframe] = useState(`<iframe id="github-preview-iframe" src="${DOMAIN + "/" + username}"></iframe>`);
   const [iframeCopied, setIframeCopied] = useState(false);
-  const [iframeStyle, setIframeStyle] = useState(`#github-preview-iframe {
-    width: 600px;
-    height: 300px;
-    border: none;
-    border-radius: 20px;
-  }`);
   const [iframeStyleCopied, setIframeStyleCopied] = useState(false);
 
   const [wavesEnabled, setWavesEnabled] = useState(true);
@@ -71,7 +72,7 @@ export default function Preview() {
       setLoading(false);
     }
     getProjectData();
-  }, []);
+  }, [location.state, username]);
 
   const handleEditProject = (project: any) => {
     setEditProjectProject(project);
@@ -113,7 +114,7 @@ export default function Preview() {
 
     // Using firebase cloud storage for project pic
     const storageRef = ref(storage, 'projectPic/' + currentUser.uid + '/' + project);
-    const uploadSnapshot = await uploadBytes(storageRef, projectPicFile);
+    await uploadBytes(storageRef, projectPicFile);
     const newPicUrl = await getDownloadURL(storageRef);
 
     setEditProjectImage(newPicUrl);
