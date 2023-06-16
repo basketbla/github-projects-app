@@ -17,6 +17,7 @@ import { useAuth } from '../contexts/AuthContext';
 import MyModal from './MyModal';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ClimbingBoxLoader } from 'react-spinners';
+import { DOMAIN } from '../utils/constants';
 
 export default function Preview() {
 
@@ -39,9 +40,9 @@ export default function Preview() {
   const [editProjectImage, setEditProjectImage] = useState("");
 
   const [showFunStuffModal, setShowFunStuffModal] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState("http://localhost:3000/basketbla");
+  const [previewUrl, setPreviewUrl] = useState(DOMAIN + "/" + username);
   const [previewUrlCopied, setPreviewUrlCopied] = useState(false);
-  const [iframe, setIframe] = useState(`<iframe id="github-preview-iframe" src="http://localhost:3000/basketbla">`);
+  const [iframe, setIframe] = useState(`<iframe id="github-preview-iframe" src="${DOMAIN + "/" + username}"></iframe>`);
   const [iframeCopied, setIframeCopied] = useState(false);
   const [iframeStyle, setIframeStyle] = useState(`#github-preview-iframe {
     width: 600px;
@@ -328,14 +329,16 @@ export default function Preview() {
               <div className="prev-hor-container">
                 <img
                   // src={projects[project].image ?? "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
-                  src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                  src={projects[project].image?.includes("https://") ? projects[project].image : require("../assets/code_filler.png")}
                   alt="project preview"
                   className="slide-image"
                 />
                 <div className="preview-text-container">
-                  <div className="prev-title">{projects[project].title}</div>
+                  <a className="title-link" href={projects[project].link} target="_blank" rel="noreferrer">
+                    <div className="prev-title">{projects[project].title}</div>
+                  </a>
                   <img
-                    src={projects[project].image?.includes("https://") ? projects[project].image : "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}
+                    src={projects[project].image?.includes("https://") ? projects[project].image : require("../assets/code_filler.png")}
                     // src={projects[project].image ?? "https://preview.redd.it/vxb5lk0zxra71.png?auto=webp&s=bbf8e7d6a39fe7b0e29345e5e4cd56492794f09c"}              
                     alt="project preview"
                     className="slide-image-under-title"

@@ -69,7 +69,9 @@ exports.generatePreview = functions.https.onCall(async (data, context) => {
 
     repoData.idx = idx;
     idx++;
+
     repoData.title = repo;
+    repoData.link = "https://github.com/" + username + "/" + repo;
 
     // Get readmes
     try {
