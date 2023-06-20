@@ -14,6 +14,7 @@ import { generatePreview, getProjectList } from '../utils/firebase';
 // import { db } from '../utils/firebase';
 // import { getDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function SelectProjects() {
 
@@ -27,6 +28,7 @@ export default function SelectProjects() {
   const [excludedProjects, setExcludedProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("Fetching your projects...");
+  const [username, setUsername] = useState('');
   
   useEffect(() => {
     const fetchProjects = async () => {
@@ -52,6 +54,13 @@ export default function SelectProjects() {
       // });
       const response: any = await getProjectList({ accessToken: githubToken });
       setIncludedProjects(response.data);
+
+      const headers = {
+        "Authorization": `Bearer ${githubToken}`,
+      };
+      const usernameResponse = await axios.get(`https://api.github.com/user`, {headers});
+      setUsername(usernameResponse.data.login);
+
       setLoading(false);
     }
 
@@ -63,12 +72,11 @@ export default function SelectProjects() {
     setLoading(true);
 
     // wait on cloud function that gets all github info and adds it to db
-    await generatePreview({username: "basketbla", accessToken: githubToken, repos: includedProjects})
+    await generatePreview({username: username, accessToken: githubToken, repos: includedProjects})
 
     // CHANGE THIS TO ACTUALLY RETURN STUFF
 
     // Go to preview page -> how do we want waves to work?
-    const username = 'basketbla';
     navigate(`/${username}`);
   }
   
