@@ -9,6 +9,7 @@
   box-sizing: border-box;
   /* min-height: 600px; */
   position: relative;
+  background-color: white;
 }
 
 /* .App {
